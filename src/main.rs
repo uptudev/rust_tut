@@ -9,9 +9,9 @@ fn main() {
         /* Prompt for input */
         print!("Please enter the number to find the inverse square root of: ");
         println!();
+        let mut in_string: String = String::new();
 
         /* Get input and bind it to a string named in_string */
-        let mut in_string: String = String::new();
         std::io::stdin()
             .read_line(&mut in_string)
             .expect("Failed to read line");
@@ -23,9 +23,9 @@ fn main() {
             Err(_) => continue, // Else reprompt.
         };
 
-        let fl32: f32 = basics::q_rsqrt32(input as f32);
-        let fl64: f64 = basics::q_rsqrt(input);
-        let fl_real: f64 = basics::rsqrt(input);
+        let fl32: f32 = basics::q_rsqrt32(input as f32); // Do 32-bit Q_rsqrt (OG Quake algorithm)
+        let fl64: f64 = basics::q_rsqrt(input); // Do improved 64-bit q_rsqrt
+        let fl_real: f64 = basics::rsqrt(input); // Also process a slow inverse square to compare (most accurate)
         println!("32-bit approximation: \t\t{fl32}");
         println!("64-bit approximation: \t\t{fl64}");
         println!("Slow calculation (most precise):{fl_real}");
@@ -33,6 +33,7 @@ fn main() {
         print!("Do another? (y/n): ");
         println!();
 
+        /* Get input and bind it to the variable in_string */
         std::io::stdin()
             .read_line(&mut in_string)
             .expect("Failed to read line");
@@ -47,5 +48,17 @@ fn main() {
             break;
         }
     }
-    guessing_game::guess();
+    guessing_game::guess(); // Run guessing_game
+    println!();
+    let mut in_string: String = String::new(); // in_string went out of scope earlier, so we can re-initialize it to make it empty
+
+    print!("Please enter a string: ");
+    println!();
+    std::io::stdin()
+        .read_line(&mut in_string)
+        .expect("Failed to read line");
+    println!();
+    let word = basics::first_word(&in_string[..]); // Must be bound to word variable to be printed in below lines
+    println!("{word}");
+    println!();
 }
