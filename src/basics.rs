@@ -36,15 +36,18 @@ pub fn q_rsqrt(f_in: f64) -> f64 {
     let f_out: f64 = f_out * (1.5 - 0.5 * f_in * f_out * f_out); // 3rd iteration, can be removed; provides full precision.
     return f_out;
 }
+
 /*
  * rsqrt is a slower method that returns the true inverse square for referencing. This is how your average Python dev would tackle the inverse square question.
  */
 pub fn rsqrt(x: f64) -> f64 {
     return (1.0) / x.sqrt();
 }
+
 /*
  * first_word takes a string slice as an argument and returns the first word in said string slice as another string slice.
  */
+// 2023/05/15: What the actual fuck is this function?? WHY DID I WRITE THIS?????
 pub fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes(); // Deconstruct string slice into individual char bytes
 
@@ -58,3 +61,11 @@ pub fn first_word(s: &str) -> &str {
 
     &s // If no space is encountered (and thus no return called), return the entire slice, as it is a word in itself.
 }
+
+// 2023/05/16: Like this accomplishes the exact same thing with one line, so these have no reason to
+// be functions at all.
+pub fn first_word_but_not_awful(s: &str) -> &str {
+    s.split(' ').collect::<Vec<_>>()[0]
+}
+
+                                                                                                                                                                            
