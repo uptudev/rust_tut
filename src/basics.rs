@@ -65,7 +65,7 @@ pub fn first_word(s: &str) -> &str {
 // 2023/05/16: Like this accomplishes the exact same thing with one line, so these have no reason to
 // be functions at all.
 pub fn first_word_but_not_awful(s: &str) -> &str {
-    s.split(' ').collect::<Vec<_>>()[0]
+    s.split_whitespace().collect::<Vec<_>>()[0]
 }
 
                                                                                                                                                                             
